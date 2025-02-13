@@ -11,7 +11,7 @@ import androidx.room.RoomDatabase
     exportSchema = false
 )
 abstract class ContactDatabase : RoomDatabase() {
-    abstract var contactDao: ContactDao
+    abstract val contactDao: ContactDao
 
     companion object {
         fun createDatabase(context: Context) : ContactDatabase {
