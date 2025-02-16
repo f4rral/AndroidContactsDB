@@ -30,13 +30,16 @@ class ContactUI {
 
 @Composable
 fun ContactItem(
-    item: Contact = Contact(id = 0, name = "name", email = "e-mail")
+    item: Contact = Contact(id = 0, name = "name", email = "e-mail"),
+    onClick: ((id: Int) -> Unit)? = null
 ) {
     val context = LocalContext.current
 
     Card(
         onClick = {
-            Toast.makeText(context, "onClick ContactItem ${item.id}", Toast.LENGTH_SHORT).show()
+            if (onClick != null) {
+                onClick(item.id)
+            }
         }
     ) {
         Column(
@@ -52,12 +55,18 @@ fun ContactItem(
 }
 
 @Composable
-fun ContactList(contactList: List<Contact> = ContactUI.previewContactData) {
+fun ContactList(
+    contactList: List<Contact> = ContactUI.previewContactData,
+    onClickItem: ((id: Int) -> Unit)? = null
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(contactList) {
-            ContactItem(item = it)
+            ContactItem(
+                item = it,
+                onClick = onClickItem
+            )
         }
     }
 }
