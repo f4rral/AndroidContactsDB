@@ -11,7 +11,9 @@ import com.example.contactsdb.viewmodels.ContactDetailViewModelFactory
 
 @Composable
 fun ContactDetailScreen(id: Int) {
-    val vmContactDetail: ContactDetailViewModel = viewModel(factory = ContactDetailViewModelFactory(id))
+    val vmContactDetail: ContactDetailViewModel = viewModel(
+        factory = ContactDetailViewModelFactory(id)
+    )
     val contact = vmContactDetail.contact.collectAsState(initial = null).value
 
     Column {
