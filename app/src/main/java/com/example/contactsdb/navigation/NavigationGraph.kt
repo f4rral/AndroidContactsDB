@@ -32,7 +32,10 @@ fun NavigationGraph(
             )
         ) { stackEntry ->
             val contactId = stackEntry.arguments?.getInt("contactId")
-            ContactDetailScreen(contactId)
+
+            if (contactId != null) {
+                ContactDetailScreen(contactId)
+            }
         }
     }
 }

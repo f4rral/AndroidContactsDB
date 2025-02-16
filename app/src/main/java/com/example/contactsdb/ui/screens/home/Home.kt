@@ -23,8 +23,8 @@ import com.example.contactsdb.viewmodels.ContactsViewModel
 fun HomeScreen(
     navController: NavHostController
 ) {
-    val vmContact: ContactsViewModel = viewModel(factory = ContactsViewModel.factory)
-    val contactList = vmContact.contactList.collectAsState(initial = emptyList()).value
+    val vmContacts: ContactsViewModel = viewModel(factory = ContactsViewModel.factory)
+    val contactList = vmContacts.contactList.collectAsState(initial = emptyList()).value
 
     HomeBody(
         contactList,
