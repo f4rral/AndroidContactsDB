@@ -48,7 +48,7 @@ fun HomeBody(
         )
 
         Button(
-            onClick = { ContactsApplication.context.navController.navigate("contact_detail") }
+            onClick = { ContactsApplication.context.navController.navigate("contact_detail/-1") }
         ) {
             Text(
                 text = "Test Button"
@@ -58,7 +58,7 @@ fun HomeBody(
         ContactList(
             contactList = contactList,
             onClickItem = { id: Int ->
-                ContactsApplication.context.navController.navigate("contact_detail")
+                ContactsApplication.context.navController.navigate("contact_detail/$id")
                 Toast.makeText(context, "onClick ContactItem $id", Toast.LENGTH_SHORT).show()
             }
         )

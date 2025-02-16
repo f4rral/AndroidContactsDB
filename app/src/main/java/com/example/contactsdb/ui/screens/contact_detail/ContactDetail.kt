@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ContactDetailScreen() {
+fun ContactDetailScreen(id: Int?) {
     Text(
-        text = "DetailContactScreen",
+        text = "DetailContactScreen $id",
         fontSize = 26.sp
     )
 }
