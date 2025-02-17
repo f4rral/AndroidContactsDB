@@ -38,7 +38,7 @@ fun ContactItem(
     Card(
         onClick = {
             if (onClick != null) {
-                onClick(item.id)
+                onClick(item.id!!)
             }
         }
     ) {

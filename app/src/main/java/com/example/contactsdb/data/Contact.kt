@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "contact")
 data class Contact(
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    var id: Int? = null,
     var name: String,
     var email: String
 )
