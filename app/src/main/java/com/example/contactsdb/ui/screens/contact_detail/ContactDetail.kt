@@ -6,13 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.contactsdb.viewmodels.ContactDetailViewModel
-import com.example.contactsdb.viewmodels.ContactDetailViewModelFactory
+import com.example.contactsdb.viewmodels.ContactDetailVM
+import com.example.contactsdb.viewmodels.ContactDetailVMFactory
 
 @Composable
 fun ContactDetailScreen(id: Int) {
-    val vmContactDetail: ContactDetailViewModel = viewModel(
-        factory = ContactDetailViewModelFactory(id)
+    val vmContactDetail: ContactDetailVM = viewModel(
+        factory = ContactDetailVMFactory(id)
     )
     val contact = vmContactDetail.contact.collectAsState(initial = null).value
 

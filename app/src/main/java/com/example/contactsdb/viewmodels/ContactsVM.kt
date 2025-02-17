@@ -9,17 +9,17 @@ import com.example.contactsdb.data.ContactDao
 import com.example.contactsdb.data.ContactDatabase
 import kotlin.reflect.KClass
 
-class ContactsViewModel(contactDao: ContactDao) : ViewModel() {
+class ContactsVM(contactDao: ContactDao) : ViewModel() {
     val contactList = contactDao.getAll()
 }
 
-class ContactsViewModelFactory() : ViewModelProvider.Factory {
+class ContactsVMFactory() : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(
         modelClass: KClass<T>,
         extras: CreationExtras
     ): T {
         val database: ContactDatabase = (extras[APPLICATION_KEY] as ContactsApplication).database
 
-        return ContactsViewModel(contactDao = database.contactDao) as T
+        return ContactsVM(contactDao = database.contactDao) as T
     }
 }

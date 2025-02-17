@@ -6,22 +6,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.contactsdb.viewmodels.ContactCreateViewModel
-import com.example.contactsdb.viewmodels.ContactCreateViewModelFactory
+import com.example.contactsdb.viewmodels.ContactCreateVM
+import com.example.contactsdb.viewmodels.ContactCreateVMFactory
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun ContactCreate() {
-    val vm: ContactCreateViewModel = viewModel(
-        factory = ContactCreateViewModelFactory()
+    val vm: ContactCreateVM = viewModel(
+        factory = ContactCreateVMFactory()
     )
 
     val context = LocalContext.current
@@ -35,7 +35,7 @@ fun ContactCreate() {
             fontSize = 26.sp
         )
 
-        TextField(
+        OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth(),
             value = vm.name.value,
@@ -47,7 +47,7 @@ fun ContactCreate() {
             }
         )
 
-        TextField(
+        OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth(),
             value = vm.email.value,

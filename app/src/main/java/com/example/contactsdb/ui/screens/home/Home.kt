@@ -17,15 +17,15 @@ import com.example.contactsdb.ContactsApplication
 import com.example.contactsdb.data.Contact
 import com.example.contactsdb.ui.contact.ContactList
 import com.example.contactsdb.ui.contact.ContactUI
-import com.example.contactsdb.viewmodels.ContactsViewModel
-import com.example.contactsdb.viewmodels.ContactsViewModelFactory
+import com.example.contactsdb.viewmodels.ContactsVM
+import com.example.contactsdb.viewmodels.ContactsVMFactory
 
 @Composable
 fun HomeScreen(
     navController: NavHostController
 ) {
-    val vmContacts: ContactsViewModel = viewModel(
-        factory = ContactsViewModelFactory()
+    val vmContacts: ContactsVM = viewModel(
+        factory = ContactsVMFactory()
     )
     val contactList = vmContacts.contactList.collectAsState(initial = emptyList()).value
 
