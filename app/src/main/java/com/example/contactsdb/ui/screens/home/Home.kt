@@ -51,10 +51,10 @@ fun HomeBody(
         )
 
         Button(
-            onClick = { ContactsApplication.context.navController.navigate("contact_detail/-1") }
+            onClick = { ContactsApplication.context.navController.navigate("contact_create") }
         ) {
             Text(
-                text = "Test Button"
+                text = "Создать"
             )
         }
 
