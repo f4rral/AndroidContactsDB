@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.contactsdb.ContactsApplication
 import com.example.contactsdb.viewmodels.ContactCreateVM
 import com.example.contactsdb.viewmodels.ContactCreateVMFactory
 
@@ -63,6 +64,7 @@ fun ContactCreate() {
             onClick = {
                 Toast.makeText(context, "onClick add contact", Toast.LENGTH_SHORT).show()
                 vm.createContact()
+                ContactsApplication.context.navController.navigate("home")
             }
         ) {
             Text(
