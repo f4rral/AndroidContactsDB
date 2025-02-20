@@ -19,9 +19,7 @@ fun NavigationGraph(
         startDestination = "home"
     ) {
         composable(route = "home") {
-            HomeScreen(
-                navController = navController
-            )
+            HomeScreen()
         }
 
         composable(
