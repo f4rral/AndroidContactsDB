@@ -2,10 +2,12 @@ package com.example.contactsdb.ui.screens.contact_detail
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -40,11 +42,23 @@ fun ContactDetailScreen(id: Int) {
     ) {
         Column {
             Text(
-                text = "${contact?.id}, ${contact?.name}, ${contact?.email}",
-                fontSize = 22.sp
+                text = "id: ${contact?.id}",
+                fontSize = 24.sp
+            )
+
+            Text(
+                text = "name: ${contact?.name}",
+                fontSize = 24.sp
+            )
+
+            Text(
+                text = "e-mail: ${contact?.email}",
+                fontSize = 24.sp
             )
 
             Button(
+                modifier = Modifier
+                    .fillMaxWidth(),
                 onClick = {
                     Toast.makeText(context, "onClick delete contact", Toast.LENGTH_SHORT).show()
                     ContactsApplication.context.navController.navigate(
@@ -60,7 +74,8 @@ fun ContactDetailScreen(id: Int) {
                 }
             ) {
                 Text(
-                    text = "Удалить"
+                    text = "Удалить",
+                    fontSize = 24.sp
                 )
             }
         }
