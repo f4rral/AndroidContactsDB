@@ -1,9 +1,6 @@
 package com.example.contactsdb.ui.screens.contact_create
 
-import android.annotation.SuppressLint
 import android.widget.Toast
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -12,13 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.contactsdb.ContactsApplication
+import com.example.contactsdb.navigation.NavigationRoute
+import com.example.contactsdb.ui.screens.layouts.ScreenLayout
 import com.example.contactsdb.viewmodels.ContactCreateVM
 import com.example.contactsdb.viewmodels.ContactCreateVMFactory
 
-@SuppressLint("UnrememberedMutableState")
+
 @Composable
 fun ContactCreate() {
     val vm: ContactCreateVM = viewModel(
@@ -27,15 +25,9 @@ fun ContactCreate() {
 
     val context = LocalContext.current
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
+    ScreenLayout(
+        title = "ContactCreate"
     ) {
-        Text(
-            text = "ContactCreate",
-            fontSize = 26.sp
-        )
-
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -64,7 +56,9 @@ fun ContactCreate() {
             onClick = {
                 Toast.makeText(context, "onClick add contact", Toast.LENGTH_SHORT).show()
                 vm.createContact()
-                ContactsApplication.context.navController.navigate("home")
+                ContactsApplication.context.navController.navigate(
+                    route = NavigationRoute.home
+                )
             }
         ) {
             Text(

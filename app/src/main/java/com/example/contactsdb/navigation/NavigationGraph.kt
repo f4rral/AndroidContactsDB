@@ -18,18 +18,20 @@ fun NavigationGraph(
         navController = navController,
         startDestination = "home"
     ) {
-        composable(route = "home") {
+        composable(
+            route = NavigationRoute.home
+        ) {
             HomeScreen()
         }
 
         composable(
-            route = "contact_create"
+            route = NavigationRoute.contactCreate
         ) {
             ContactCreate()
         }
 
         composable(
-            route = "contact_detail" + "/{contactId}",
+            route = "${NavigationRoute.contactDetail}/{contactId}",
             arguments = listOf(
                 navArgument("contactId") {
                     type = NavType.IntType
@@ -43,4 +45,10 @@ fun NavigationGraph(
             }
         }
     }
+}
+
+object NavigationRoute {
+    const val home = "HOME"
+    const val contactCreate = "CONTACT_CREATE"
+    const val contactDetail =  "CONTACT_DETAIL"
 }
