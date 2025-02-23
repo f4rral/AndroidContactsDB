@@ -1,5 +1,6 @@
 package com.example.contactsdb.ui.screens.layouts
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +21,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.contactsdb.ui.theme.ThemeColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,19 +34,21 @@ fun ScreenLayout(
     content: @Composable () -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.windowInsetsPadding(
-            insets = WindowInsets.systemBars
-        ),
-
+        modifier = Modifier
+            .windowInsetsPadding(
+                insets = WindowInsets.systemBars
+            ),
         topBar = {
             TopAppBar(
                 colors = topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = ThemeColor.gray2,
+                    titleContentColor = ThemeColor.gray7,
                 ),
 
                 title = {
-                    Text(text = title)
+                    Text(
+                        text = title,
+                    )
                 },
 
                 navigationIcon = {
@@ -82,10 +87,17 @@ fun ScreenLayout(
     ) { innerPadding ->
         Column(
             modifier = Modifier
+                .background(ThemeColor.gray4)
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
             content()
         }
     }
+}
+
+@Preview
+@Composable
+fun ScreenLayoutPreview() {
+    ScreenLayout {}
 }

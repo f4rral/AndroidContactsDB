@@ -1,55 +1,166 @@
 package com.example.contactsdb.ui.contact
 
-import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.contactsdb.data.Contact
 import com.example.contactsdb.ui.theme.ContactsDBTheme
+import com.example.contactsdb.ui.theme.ThemeColor
 
 
 class ContactUI {
     companion object {
         val previewContactData = listOf(
-            Contact(id = 0, name = "name0", email = "email0@mail.ru"),
-            Contact(id = 1, name = "name1", email = "email1@mail.ru"),
-            Contact(id = 2, name = "name2", email = "email2@mail.ru")
+            Contact(id = 0, name = "Jerome Bell", email = "@whitefish664"),
+            Contact(id = 1, name = "Jerome Bell", email = "@whitefish664"),
+            Contact(id = 2, name = "Jerome Bell", email = "@whitefish664")
         )
     }
 }
 
 @Composable
 fun ContactItem(
-    item: Contact = Contact(id = 0, name = "name", email = "e-mail"),
+    item: Contact = Contact(id = null, name = "name", email = "e-mail"),
     onClick: ((id: Int) -> Unit)? = null
 ) {
-    val context = LocalContext.current
-
     Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(16.dp)),
+        colors = CardDefaults.cardColors(
+            containerColor = ThemeColor.gray2,
+        ),
         onClick = {
             if (onClick != null) {
                 onClick(item.id!!)
             }
         }
     ) {
-        Column(
+        Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
+                .padding(16.dp)
+                .height(IntrinsicSize.Max)
         ) {
-            Text(text = item.id.toString())
-            Text(text = item.name)
-            Text(text = item.email)
+            Box(
+                modifier = Modifier
+                    .size(width = 48.dp, height = 48.dp)
+                    .clip(shape = RoundedCornerShape(percent = 50))
+                    .background(ThemeColor.violet3)
+            )
+
+            Column(
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .padding(start = 8.dp)
+                    .fillMaxHeight()
+
+            ) {
+                Text(
+                    text = item.name,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight(600),
+                    lineHeight = 19.sp,
+                    color = ThemeColor.gray7,
+                    modifier = Modifier
+                        .padding(bottom = 8.dp)
+                )
+                Text(
+                    text = item.email,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight(400),
+                    lineHeight = 17.sp,
+                    color = ThemeColor.gray5
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun ContactDetail(
+    item: Contact,
+    onDelete: (() -> Unit)? = null
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(12.dp))
+            .background(ThemeColor.gray2)
+            .padding(16.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+                .clip(shape = RoundedCornerShape(percent = 50))
+                .size(width = 64.dp, height = 64.dp)
+                .background(ThemeColor.violet3)
+        )
+
+        Text(
+            text = item.name,
+            fontSize = 16.sp,
+            fontWeight = FontWeight(600),
+            color = ThemeColor.gray7,
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+        )
+
+        Text(
+            text = item.name,
+            fontSize = 14.sp,
+            fontWeight = FontWeight(400),
+            color = ThemeColor.gray5,
+            modifier = Modifier
+                .padding(bottom = 8.dp)
+        )
+
+        Button(
+            colors = ButtonColors(
+                contentColor = ThemeColor.gray2,
+                containerColor = ThemeColor.violet3,
+                disabledContentColor = ThemeColor.gray4,
+                disabledContainerColor = ThemeColor.gray5
+            ),
+            shape = RoundedCornerShape(8.dp),
+            contentPadding = PaddingValues(12.dp),
+            onClick = {
+                if (onDelete != null) {
+                    onDelete()
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Удалить",
+                fontSize = 16.sp,
+                fontWeight = FontWeight(600)
+            )
         }
     }
 }
@@ -60,6 +171,7 @@ fun ContactList(
     onClickItem: ((id: Int) -> Unit)? = null
 ) {
     LazyColumn(
+        contentPadding = PaddingValues(top = 8.dp, bottom = 8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(contactList) {
@@ -71,7 +183,7 @@ fun ContactList(
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 private fun ContactListPreview() {
     ContactsDBTheme {
@@ -81,10 +193,18 @@ private fun ContactListPreview() {
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 private fun ContactItemPreview() {
     ContactsDBTheme {
         ContactItem(item = ContactUI.previewContactData[0])
+    }
+}
+
+@Preview
+@Composable
+private fun ContactDetailPreview() {
+    ContactsDBTheme {
+        ContactDetail(item = ContactUI.previewContactData[0])
     }
 }
