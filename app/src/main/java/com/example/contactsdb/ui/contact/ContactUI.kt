@@ -22,12 +22,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,9 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.contactsdb.ContactsApplication
 import com.example.contactsdb.data.Contact
-import com.example.contactsdb.navigation.NavigationRoute
 import com.example.contactsdb.ui.theme.ContactsDBTheme
 import com.example.contactsdb.ui.theme.ThemeColor
 
@@ -175,6 +171,7 @@ fun ContactDetail(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContactCreate(
     name: String = "",
@@ -183,6 +180,9 @@ fun ContactCreate(
     onChangeEmail: ((value: String) -> Unit)? = null,
     onCreate: (() -> Unit)? = null
 ) {
+
+    val colors = TextFieldDefaults.colors()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -203,6 +203,10 @@ fun ContactCreate(
                     text = "Имя"
                 )
             },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = ThemeColor.gray5,
+                focusedBorderColor = ThemeColor.violet3
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 8.dp)
@@ -220,6 +224,10 @@ fun ContactCreate(
                     text = "E-mail"
                 )
             },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                unfocusedBorderColor = ThemeColor.gray5,
+                focusedBorderColor = ThemeColor.violet3,
+            ),
             modifier = Modifier
                 .fillMaxWidth()
         )
