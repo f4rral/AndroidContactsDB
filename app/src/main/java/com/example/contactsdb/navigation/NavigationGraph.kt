@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.contactsdb.ui.screens.contact_create.ContactCreate
+import com.example.contactsdb.ui.screens.contact_create.ContactCreateScreen
 import com.example.contactsdb.ui.screens.contact_detail.ContactDetailScreen
 import com.example.contactsdb.ui.screens.home.HomeScreen
 
@@ -27,7 +27,7 @@ fun NavigationGraph(
         composable(
             route = NavigationRoute.contactCreate
         ) {
-            ContactCreate()
+            ContactCreateScreen()
         }
 
         composable(

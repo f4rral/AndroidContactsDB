@@ -1,5 +1,6 @@
 package com.example.contactsdb.ui.contact
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,16 +20,25 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.contactsdb.ContactsApplication
 import com.example.contactsdb.data.Contact
+import com.example.contactsdb.navigation.NavigationRoute
 import com.example.contactsdb.ui.theme.ContactsDBTheme
 import com.example.contactsdb.ui.theme.ThemeColor
 
@@ -136,8 +146,6 @@ fun ContactDetail(
             fontSize = 14.sp,
             fontWeight = FontWeight(400),
             color = ThemeColor.gray5,
-            modifier = Modifier
-                .padding(bottom = 8.dp)
         )
 
         Button(
@@ -154,10 +162,88 @@ fun ContactDetail(
                     onDelete()
                 }
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
         ) {
             Text(
                 text = "Удалить",
+                fontSize = 16.sp,
+                fontWeight = FontWeight(600)
+            )
+        }
+    }
+}
+
+@Composable
+fun ContactCreate(
+    name: String = "",
+    email: String = "",
+    onChangeName: ((value: String) -> Unit)? = null,
+    onChangeEmail: ((value: String) -> Unit)? = null,
+    onCreate: (() -> Unit)? = null
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(shape = RoundedCornerShape(12.dp))
+            .background(ThemeColor.gray2)
+            .padding(16.dp)
+    ) {
+        OutlinedTextField(
+            value = name,
+            onValueChange = {
+                if (onChangeName != null) {
+                    onChangeName(it)
+                }
+            },
+            label = {
+                Text(
+                    text = "Имя"
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 8.dp)
+        )
+
+        OutlinedTextField(
+            value = email,
+            onValueChange = {
+                if (onChangeEmail != null) {
+                    onChangeEmail(it)
+                }
+            },
+            label = {
+                Text(
+                    text = "E-mail"
+                )
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+        )
+
+        Button(
+            colors = ButtonColors(
+                contentColor = ThemeColor.gray2,
+                containerColor = ThemeColor.violet3,
+                disabledContentColor = ThemeColor.gray4,
+                disabledContainerColor = ThemeColor.gray5
+            ),
+            shape = RoundedCornerShape(8.dp),
+            contentPadding = PaddingValues(12.dp),
+            onClick = {
+                if (onCreate != null) {
+                    onCreate()
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp)
+        ) {
+            Text(
+                text = "Создать",
                 fontSize = 16.sp,
                 fontWeight = FontWeight(600)
             )
@@ -206,5 +292,16 @@ private fun ContactItemPreview() {
 private fun ContactDetailPreview() {
     ContactsDBTheme {
         ContactDetail(item = ContactUI.previewContactData[0])
+    }
+}
+
+@Preview
+@Composable
+fun ContactCreatePreview() {
+    ContactsDBTheme {
+        ContactCreate(
+            name = "name",
+            email = "email"
+        )
     }
 }
